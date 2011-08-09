@@ -1,0 +1,11 @@
+{
+  "name": "JAstronaut",
+  "version": "1.0",
+  "description": "This is a little game. Special thanks to Mr Nazar Hussain, Mr.Raza Khalid, Mudasar Qadir, Ali kamran",
+  "icons": { "128": "icon_128.png" },
+  "browser_action": {
+    "default_title": "JAstronaut",
+    "default_icon": "icon_128.png",
+    "default_popup": "index.html"
+  }
+}
