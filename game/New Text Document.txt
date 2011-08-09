@@ -1,9 +1,0 @@
-  <h1>MY AIRCRAFT GAME</h1>
-    <div class="instructions">
-                    <h3> INstructions </h3>
-                    <p>To move plan left or right 'Press left/Right Arrow key'<p>
-
-                    <p>Hit space bar for Fire</p>
-
-                    <p>bonus will add one life</p>
-      </div>  
