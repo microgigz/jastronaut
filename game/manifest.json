@@ -5,10 +5,10 @@
   "icons": { "128": "icon_128.png" },
   "app": {
     "urls": [
-      " "
+      "http://mysubdomain.jastronauts.com/"
     ],
     "launch": {
-      "web_url": " "
+      "web_url": "http://mysubdomain.jastronauts.com/index.html"
     }
   }
 }
