@@ -111,6 +111,7 @@ label{
     float:left;
     position:absolute;
     -moz-border-radius:  10px;
+    -webkit-border-radius: 10px;
 }
 .plane  {
     position: absolute;

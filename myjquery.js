@@ -4,15 +4,22 @@ $(document).ready(function()  {
                 
 			  
     var score = 00;
-    var life = parseFloat($.cookie("life")) ;
+    if($.cookie('life') == '[object Object]' )
+      {var life = 3 ;
+       var bonusSpeed=3;
+       var attackerSpeed=2; 
+      }
+    else
+      { var life = parseFloat($.cookie("life")) ;
+        var attackerSpeed = parseFloat($.cookie("attackerSpeed"));
+        var bonusSpeed = parseFloat($.cookie("bonusSpeed"));
+      }
     var bonus = 0;
-    var attackerSpeed = parseFloat($.cookie("attackerSpeed"));
-    var bonusSpeed = parseFloat($.cookie("bonusSpeed"));
+    
     //init();
-               
-				
-    $(".score").html( score );
-                
+			
+    $(".score").html( score );     
+    
     function firing(){
         firing_list = $('.fire')
         firing_list.each(function(index, element) {
@@ -33,7 +40,7 @@ $(document).ready(function()  {
         
         bonus_list.each(function(index, element) {
                          
-            var x =   parseFloat($(element).css('top').split("px")[0]) + bonusSpeed;console.log(x);
+            var x =   parseFloat($(element).css('top').split("px")[0]) + bonusSpeed;
             $(element).css('top',x+"px");
             var current_obj = $(element);
             var plane_top = parseFloat(plane.css('top').split("px")[0]);
@@ -85,7 +92,9 @@ $(document).ready(function()  {
                     $(".score").html( score );
                     current_obj.hide("explode", 180);
                     current_obj.remove();
-                    $(element).remove();  
+                    $(element).remove(); 
+                    //alert("hi");
+                   
                 // init();
     
                 }
@@ -102,7 +111,10 @@ $(document).ready(function()  {
         {
             if(confirm("Want to PLay more!!"))
             {
-                life = 3;
+				if($.cookie('life') == '[object Object]' )
+                { life = 3 ;}
+				else
+				{life = parseFloat($.cookie("life")) ;}
                 score=0;
                 bonus=0;
                 $('.fire').remove();
@@ -113,7 +125,7 @@ $(document).ready(function()  {
     
             }
             else
-                window.location="game.html";
+                window.location="index.html";
         }
         else
         {
@@ -124,7 +136,7 @@ $(document).ready(function()  {
     function createfire()
     {
         var plane = $(".plane");
-        var x = parseFloat(plane.css('left').split("px")[0]) + 22;
+        var x = parseFloat(plane.css('left').split("px")[0]) + 25;
         $('<div class="fire"></div>').css({
             flaot:'left',
             position:'absolute',
@@ -161,29 +173,23 @@ $(document).ready(function()  {
         var size = Math.floor((1 + Math.random() ) * 12)+ "px";
         $('<div class="attackers"></div>').css({
             flaot:'left',
-            position:'absolute',
-                        
+            position:'absolute',         
             width: size,
             height: size,
             left: left,
             top:'2px',
             backgroundColor: colr 
         // border: '1px solid black' 
-                                                     
-                                                    
+                                         
         }).appendTo('#gameGround');
-                
-    // alert("object created");
-                                                     
-    
+               
     }
     function init(){
-                    
+                  
     // $("#life").val(life);
     // $("#bonusSpeedControl").val(bonusSpeed);
     // $("#speedControl").val(attackerSpeed);
               
-                   
     }
     var generate_counter_lifespan = 0; 
     var max_number_object = 8; 
@@ -197,7 +203,7 @@ $(document).ready(function()  {
             generate_counter_lifespan = 20; 
             if ($('.attackers').length < max_number_object) 
                 create_object();
-            if( bonus == 150 )  
+            if( bonus >= 150 )  
             {
                 bonus=0;
                 creat_bonus();
@@ -232,15 +238,13 @@ $(document).ready(function()  {
         return("rgb(" + luminosity + "," + luminosity + "," + blue + ")");
     }
             
-           
-            
+                    
     setInterval(render_loop, 75);
     var direction ={
         left:'37',
         right:'39',
         spacbar:'32'
     }
-
     // var interval = setInterval(create_object, 3500);
     $(document).keydown(function(event) {
                    
@@ -269,10 +273,10 @@ $(document).ready(function()  {
             createfire();
             event.preventDefault();
         }
-    // event.preventDefault();      
+      
     });
 });  
-//  $('.plane').draggable();
+
 function clearDefault(el) {
     if (el.defaultValue==el.value) el.value = ""
 }
